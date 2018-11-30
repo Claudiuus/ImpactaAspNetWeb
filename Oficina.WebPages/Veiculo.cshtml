@@ -1,9 +1,10 @@
-﻿@{
-    Layout = null;
+﻿@using Oficina.WebPages;
+@{
+    var veiculoAplicação = new VeiculoAplicacao();
 }
 
 <!DOCTYPE html>
-
+ 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -13,7 +14,83 @@
   <h1>Cadastro de Veiculo</h1>
   <form action="/" method="post">
       <label for="marca">Marca</label>
+      <select name="marca" onchange="obterModelos(this.value)">
+          <option value="">Selecione</option>
+          @foreach (var item in veiculoAplicação.Marcas)
+          {
+              <option value="@item.Id" selected="@Convert.ToBoolean(Convert.ToString(item.Id) == veiculoAplicação.MarcaSelecionada)">@item.Nome</option>
+          }
 
+      </select>
+      <br />
+      <label for="modelo">Modelos</label>
+      <select name="modelo">
+          <option value="">Selecione</option>
+          @foreach (var item in veiculoAplicação.Modelos)
+          {
+              <option value="@item.Id">@item.Nome</option>
+          }
+
+      </select>
+      <br />
+
+
+
+
+      <label for="placa">Placa</label>
+      <input type="text" name="placa" value="" />
+      <br />
+
+      <label for="ano">Ano</label>
+      <input type="text" name="ano" value="" />
+      <br />
+
+      <label for="cor">Cores</label>
+      <select name="cor">
+          <option value="">Selecione</option>
+          @foreach (var item in veiculoAplicação.Cores)
+          {
+              <option value="@item.Id">@item.Nome</option>
+          }
+
+      </select>
+      <br />
+
+      <label for="combustivel">Combustível</label>
+      <select name="combustivel">
+          <option value="">Selecione</option>
+          @foreach (var item in veiculoAplicação.Combustiveis)
+          {
+              <!-- enumeradores é o proprio item-->
+              <option value="@((int)item)">@item</option>
+          }
+      </select>
+      <br />
+
+      <label for="cambios">Câmbios</label>
+      <select name="cambios">
+          <option value="">Selecione</option>
+          @foreach (var item in veiculoAplicação.Cambios)
+          {
+              <!-- enumeradores é o proprio item-->
+              <option value="@((int)item)">@item</option>
+          }
+      </select>
+      <br />
+      <label for="observacao">Observação</label>
+      <br />
+      <textarea name="observacao" rows="10" cols="40"></textarea>
+      <br />
+      <input type="submit" value="Gravar" />
   </form>
+  <script type="text/javascript">
+      function obterModelos(marcaId) {
+          const nomePagina = document.location.pathname;
+
+          document.location.href = nomePagina + "?marcaId=" + marcaId;
+
+      } 
+
+  </script>
 </body>
 </html>
