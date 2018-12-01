@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Oficina.Dominio
 {
-    public class Veiculo
+    public abstract class Veiculo
     {
         //public Veiculo()
         //{
@@ -17,5 +18,21 @@ namespace Oficina.Dominio
         public Cor Cor { get; set; }
         public Combustivel Combustivel { get; set; }
         public Cambio Cambio { get; set; }
+
+        public abstract List<string> Validar();//obrigatorio para todos filhos! para Herança.
+
+        protected List<string> ValidarBase()
+        {
+            var erros = new List<string>();
+
+            if (Ano <= 1980 || Ano> DateTime.Now.Year)
+            {
+
+                erros.Add($" O ano informado ({Ano}) não é valido ");
+            }
+            
+            return erros;
+        }
+
     }
 }

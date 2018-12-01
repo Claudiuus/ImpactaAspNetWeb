@@ -41,6 +41,24 @@ namespace Oficina.WebPages
             Combustiveis = Enum.GetValues(typeof(Combustivel)).Cast<Combustivel>().ToList(); //enumeradores
             Cambios = Enum.GetValues(typeof(Cambio)).Cast<Cambio>().ToList(); //enumeradores
         }
+        
+        public void Inserir()
+        {
+            var veiculo = new VeiculoPasseio();
+            var formulario = HttpContext.Current.Request.Form;
+
+            veiculo.Ano = Convert.ToInt32(formulario["ano"]);
+            veiculo.Cambio = (Cambio)Convert.ToInt32(formulario["cambios"]);
+            veiculo.Carroceria = Carroceria.Heatch;// Criar combo 
+            veiculo.Combustivel = (Combustivel)Convert.ToInt32(formulario["combustivel"]);
+            veiculo.Cor = corRepositorio.Selecionar(Convert.ToInt32(formulario["cor"]));
+            veiculo.Modelo = modeloRepositorio.Selecionar(Convert.ToInt32(formulario["modelo"]));
+            veiculo.Observacao = formulario["observacao"];
+            veiculo.Placa = formulario["placa"];
+
+
+            veiculoRepositorio.Inserir(veiculo);
+        }
     }
 
     
