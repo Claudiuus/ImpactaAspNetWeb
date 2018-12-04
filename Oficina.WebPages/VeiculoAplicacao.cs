@@ -62,7 +62,7 @@ namespace Oficina.WebPages
 
                 veiculoRepositorio.Inserir(veiculo);
             }
-            catch (FileNotFoundException ex)
+            catch (FileNotFoundException ex) when (!ex.FileName.Contains("senha"))
             {
 
                 HttpContext.Current.Items.Add("MensagemErro",$"Arquivo {ex.FileName}não encontrado");
