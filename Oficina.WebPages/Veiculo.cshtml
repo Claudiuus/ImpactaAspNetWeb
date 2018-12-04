@@ -5,7 +5,7 @@
 }
 
 <!DOCTYPE html>
- 
+
 <html>
 <head>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
@@ -31,96 +31,123 @@
 
             input[type=submit] {
                 width: 300px
-            }
+             }
+
+        #mensagemErro{
+            height:40px;
+            background-color: #dc3545;
+            margin-bottom:10px;
+            color:white;
+            text-align:center;
+            vertical-align:middle;
+            line-height:40px;
+
+
+        }
+
+
+
     </style>
 </head>
 <body>
-  <h1>Cadastro de Veiculo</h1>
+    <!-- ctrl + KS -->
+    <h1>Cadastro de Veiculo</h1>
     @if (IsPost)
     {
-        veiculoAplicacao.Inserir();
-        Response.Redirect("Veiculo");
+        try
+        {
+            veiculoAplicacao.Inserir();
+            Response.Redirect("Veiculo");
+        }
+        catch
+        {
+
+            <div id="mensagemErro">@HttpContext.Current.Items["MensagemErro"]
+
+            </div>
+        }
     }
 
-  <form action="" method="post"> <!--GET // POST -->
-      <label for="marca">Marca</label>
-      <select name="marca" onchange="obterModelos(this.value)">
-          <option value="">Selecione</option>
-          @foreach (var item in veiculoAplicacao.Marcas)
-          {
-              @*<option value="@item.Id" selected="@Convert.ToBoolean(Convert.ToString(item.Id) == veiculoAplicacao.MarcaSelecionada)">@item.Nome</option>*@
-              <option value="@item.Id" selected="@Convert.ToBoolean(item.Id.ToString() == veiculoAplicacao.MarcaSelecionada)">@item.Nome</option>
-          }
+    <form action="" method="post">
+        <!--GET // POST -->
+        <label for="marca">Marca</label>
+        <select name="marca" onchange="obterModelos(this.value)">
+            <option value="">Selecione</option>
+            @foreach (var item in veiculoAplicacao.Marcas)
+            {
+                @*<option value="@item.Id" selected="@Convert.ToBoolean(Convert.ToString(item.Id) == veiculoAplicacao.MarcaSelecionada)">@item.Nome</option>*@
+                <option value="@item.Id" selected="@Convert.ToBoolean(item.Id.ToString() == veiculoAplicacao.MarcaSelecionada)">@item.Nome</option>
+            }
 
-      </select>
-      <br />
-      <label for="modelo">Modelos</label>
-      <select name="modelo">
-          <option value="">Selecione</option>
-          @foreach (var item in veiculoAplicacao.Modelos)
-          {
-              <option value="@item.Id">@item.Nome</option>
-          }
-      </select>
-      <br />
+        </select>
+        <br />
+        <label for="modelo">Modelos</label>
+        <select name="modelo">
+            <option value="">Selecione</option>
+            @foreach (var item in veiculoAplicacao.Modelos)
+            {
+                <option value="@item.Id">@item.Nome</option>
+            }
+        </select>
+        <br />
 
 
 
 
-      <label for="placa">Placa</label>
-      <input type="text" name="placa" value="" />
-      <br />
+        <label for="placa">Placa</label>
+        <input type="text" name="placa" value="@Request.Form["placa"]" />
+        <br />
 
-      <label for="ano">Ano</label>
-      <input type="text" name="ano" value="" />
-      <br />
+        <label for="ano">Ano</label>
+        <input type="text" name="ano" value="@Request.Form["ano"]" />
+        <br />
 
-      <label for="cor">Cores</label>
-      <select name="cor">
-          <option value="">Selecione</option>
-          @foreach (var item in veiculoAplicacao.Cores)
-          {
-              <option value="@item.Id">@item.Nome</option>
-          }
+        <label for="cor">Cores</label>
+        <select name="cor">
+            <option value="">Selecione</option> <!--Recuperar dados para dropdown-->
+            @foreach (var item in veiculoAplicacao.Cores)
+            {
+                <option value="@item.Id" selected="@Convert.ToBoolean(item.Id.ToString() == Request.Form["cor"])">@item.Nome</option>
+            }
 
-      </select>
-      <br />
+        </select>
+        <br />
 
-      <label for="combustivel">Combustível</label>
-      <select name="combustivel">
-          <option value="">Selecione</option>
-          @foreach (var item in veiculoAplicacao.Combustiveis)
-          {
-              <!-- enumeradores é o proprio item-->
-              <option value="@((int)item)">@item</option>
-          }
-      </select>
-      <br />
+        <label for="combustivel">Combustível</label>
+        <select name="combustivel">
+            <option value="">Selecione</option>
+            @foreach (var item in veiculoAplicacao.Combustiveis)
+            {
+                <!-- enumeradores é o proprio item-->
+                <option value="@((int)item)">@item</option>
+            }
+        </select>
+        <br />
 
-      <label for="cambios">Câmbios</label>
-      <select name="cambios">
-          <option value="">Selecione</option>
-          @foreach (var item in veiculoAplicacao.Cambios)
-          {
-              <!-- enumeradores é o proprio item-->
-              <option value="@((int)item)">@item</option>
-          }
-      </select>
-      <br />
-      <label for="observacao">Observação</label>
-      <br />
-      <textarea name="observacao" rows="10" cols="40"></textarea>
-      <br />
-      <input type="submit" value="Gravar" />
-  </form>
-  <script type="text/javascript">
-      function obterModelos(marcaId) {
-          const nomePagina = document.location.pathname;
+        <label for="cambios">Câmbios</label>
+        <select name="cambios">
+            <option value="">Selecione</option>
+            @foreach (var item in veiculoAplicacao.Cambios)
+            {
+                <!-- enumeradores é o proprio item-->
+                <option value="@((int)item)">@item</option>
+            }
+        </select>
+        <br />
+        <label for="observacao">Observação</label>
+        <br />
+        <textarea name="observacao" rows="10" cols="40"></textarea>
+        <br />
+        <input type="submit" value="Gravar" />
+    </form>
+    <script type="text/javascript">
+        function obterModelos(marcaId) {
+            const nomePagina = document.location.pathname;
 
-          document.location.href = nomePagina + "?marcaId=" + marcaId;
+            document.location.href = nomePagina + "?marcaId=" + marcaId;
 
-      } 
+        }
 
-  </script>
+    </script>
 </body>
 </html>
