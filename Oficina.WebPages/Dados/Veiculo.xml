@@ -80,4 +80,46 @@
     <Combustivel>Gasolina</Combustivel>
     <Cambio>Manual</Cambio>
   </Veiculo>
+  <VeiculoPasseio xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>bc25cc73-8b79-4d9d-a7e2-fda664c35a39</Id>
+    <Placa>ABC2312</Placa>
+    <Ano>2015</Ano>
+    <Observacao>teste</Observacao>
+    <Modelo>
+      <Id>3</Id>
+      <Nome>Fit</Nome>
+      <Marca>
+        <Id>2</Id>
+        <Nome>Honda</Nome>
+      </Marca>
+    </Modelo>
+    <Cor>
+      <Id>1</Id>
+      <Nome>Preto</Nome>
+    </Cor>
+    <Combustivel>Flex</Combustivel>
+    <Cambio>Automatico</Cambio>
+    <Carroceria>Heatch</Carroceria>
+  </VeiculoPasseio>
+  <VeiculoPasseio xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Id>d112e170-db1d-43b2-bdb4-bf59a288b842</Id>
+    <Placa>ABC2312</Placa>
+    <Ano>2015</Ano>
+    <Observacao>teste</Observacao>
+    <Modelo>
+      <Id>1</Id>
+      <Nome>Fox</Nome>
+      <Marca>
+        <Id>1</Id>
+        <Nome>VW</Nome>
+      </Marca>
+    </Modelo>
+    <Cor>
+      <Id>1</Id>
+      <Nome>Preto</Nome>
+    </Cor>
+    <Combustivel>Gasolina</Combustivel>
+    <Cambio>Manual</Cambio>
+    <Carroceria>Heatch</Carroceria>
+  </VeiculoPasseio>
 </veiculos>
